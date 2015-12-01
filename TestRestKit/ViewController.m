@@ -68,13 +68,24 @@
     __block TestObject* test = [TestObject new];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         RKLogInfo(@"Load collection of Articles: %@", mappingResult.array);
-        [test test];
+        //[test test];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
         [test test];
     }];
     
     [objectRequestOperation start];
+    
+    /*
+    __block TestObject* test = [TestObject new];
+    void(^block)() = ^(){
+        [test test];
+    };
+    int k = 0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if(k)
+            block();
+    });*/
 }
 
 - (void)didReceiveMemoryWarning {
